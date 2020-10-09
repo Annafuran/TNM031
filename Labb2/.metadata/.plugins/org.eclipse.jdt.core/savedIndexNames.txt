@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+C:\Users\Anna\Skolarbete\TNM031\Labb2\.metadata\.plugins\org.eclipse.jdt.core
+5770218.index
+1289320443.index

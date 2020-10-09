@@ -1,0 +1,41 @@
+
+import java.math.BigInteger;
+//This class provides a cryptographically strong random number generator.
+import java.security.SecureRandom; 
+
+public class RSA {
+	
+	//THE RSA Algorithm
+	//1. Bob chooses p, q, e and calculates n. 
+	private BigInteger p = createLargePrime();
+	private BigInteger q = createLargePrime();
+	private BigInteger n = p.multiply(q);
+	private BigInteger e = createLargePrime();
+	
+	//Alices message is cat, convert with numbering.
+	private String message = "cat";
+	private BigInteger m = new BigInteger(message.getBytes());
+	
+	//Alice computes c
+	//m^e % n = ... 
+	//In other words, a == b (mod n) when (a-b)/n is an integer. 
+	private BigInteger c = m.modPow(e, n);
+	
+	//Alice sends c to Bob. He computes de, d:
+	//de = 1 (mod (p-1)(q-1))
+	private BigInteger de = (p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)));
+	//hur få ut d? 
+	private BigInteger d = e.modInverse(de);
+	
+	
+	
+	private BigInteger createLargePrime() {
+		SecureRandom temp = new SecureRandom();
+		
+		//returns a positive BigInteger that is probably a prime. 
+		//Since 2015, NIST recommends a minimum of 2048-bit keys for RSA
+		return BigInteger.probablePrime(2048, temp);
+		
+	};
+
+}
